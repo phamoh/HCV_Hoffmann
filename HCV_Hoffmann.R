@@ -1,4 +1,4 @@
-# HCV Dataset from Hof
+# HCV Dataset from Georg Hoffmann, Ralf Lichtinghagen, Frank Klawonn
 # R version 3.6.3 (2020-02-29) "Holding the Windsock"
 # Data source: https://archive.ics.uci.edu/ml/datasets/HCV+data
 # Article associated: https://jlpm.amegroups.com/article/view/4401/5424
@@ -63,7 +63,7 @@ ggplot(data = HCV, aes(x = Age_group, fill = Age_group)) +
 ggplot(data = subset(HCV, Category_type %in% c("Hepatitis", "Fibrosis", "Cirrhosis")), aes(x = Age_group, fill = Age_group)) +
   geom_bar(aes(fill = Category_type), width = 0.7) +
   scale_y_continuous(breaks = seq(0, 30, 2)) + 
-  scale_fill_brewer(palette = "Set2") +
+  scale_fill_brewer(palette = "Pastel1") +
   labs(x = "Age Range of Patients",
        y = "Number of Patients",
        fill = "Disease \nCategory") +
