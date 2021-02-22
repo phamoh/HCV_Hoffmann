@@ -29,6 +29,9 @@ HCV <- HCV %>%
   separate(Category, c("Category", "Category_type"), sep = "([=])") %>%
   mutate(Category_type = str_to_title(Category_type))
 
+HCV$Category_type <- factor(HCV$Category_type, levels = c("Blood Donor", "Suspect Blood Donor", "Hepatitis", "Fibrosis", "Cirrhosis"))
+levels(HCV$Category_type)
+
 # Categorizing age into age groups/ranges
 HCV <- HCV %>% 
   mutate(Age_group = cut(Age, 
@@ -69,6 +72,20 @@ ggplot(data = subset(HCV, Category_type %in% c("Hepatitis", "Fibrosis", "Cirrhos
        fill = "Disease \nCategory") +
   theme_bw()
 
+
+# Jitter plot of Albumin measurement (ALB) in patients with "Hepatitis", "Fibrosis", "Cirrhosis"
+# Plot includes a shaded green area that shows "normal albumin range"
+# Low albumin level in patients with hepatitis C can be a sign of cirrhosis
+
+ggplot(data = subset(HCV, Category_type %in% c("Hepatitis", "Fibrosis", "Cirrhosis")), aes(x = Category_type, y = ALB, colour = Category_type)) +
+  geom_jitter(aes(fill = Category_type), width = 0.25, show.legend =FALSE, na.rm = TRUE) + 
+  scale_y_continuous(breaks = seq(0, 60, 5)) +
+  geom_hline(yintercept = 34) +
+  geom_hline(yintercept = 54) +
+  annotate("rect", xmin = 0, xmax = 4, ymin = 34, ymax = 54, alpha = .1, fill = "#32CD32") +
+  labs(x = "Disease Category",
+       y = "Albumin Measurements (g/L)") +
+  theme_bw()
 
 
 
