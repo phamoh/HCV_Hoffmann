@@ -1,7 +1,9 @@
-# Missing Documents Report: Blinded PHI - Local
+# HCV Dataset 
 # R version 3.6.3 (2020-02-29) "Holding the Windsock"
 # Data source: https://archive.ics.uci.edu/ml/datasets/HCV+data
 # Article associated: https://jlpm.amegroups.com/article/view/4401/5424
+
+# Code Purpose: Create some plots to visualize the participant pool of hepatitis C patients
 
 
 # Packages -----------------------------------------------------------------------------------------------------------------
