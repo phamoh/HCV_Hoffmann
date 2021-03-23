@@ -1,5 +1,5 @@
 ---
-title: "Hoffmann Dataset"
+title: "Lichtinghagen Dataset"
 fontsize: 10pt
 output:
   pdf_document:
@@ -8,9 +8,8 @@ output:
     number_sections: yes
     toc: yes
     toc_depth: 2
-    highlight: tango
     fig_caption: yes
-geometry: "left=0.5in, right=0.5in, top=1in, bottom=1in"
+geometry: "left=0.75in, right=0.75in, top=0.75in, bottom=0.75in"
 urlcolor: blue
 always_allow_html: true
 header-includes:
@@ -30,7 +29,7 @@ header-includes:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.align='center', fig.pos = 'H')
 options(knitr.table.format = "latex")
 ```
 
@@ -46,16 +45,21 @@ library(kableExtra)
 Disclaimer: I did not create or collect data to compile this dataset.
 
 For more details about the dataset and the creators, Ralf Lichtinghagen, Frank Klawonn, and Georg Hoffmann, please visit:
-https://archive.ics.uci.edu/ml/datasets/HCV+data.
+https://archive.ics.uci.edu/ml/datasets/HCV+data
 
 
 \pagebreak
 # Summary # 
 
-For **Category**, there are 5 different classifications which includes the stages of Hep C:
+This is real-life data from a published study on liver fibrosis and cirrhosis in
+patients with chronic hepatitis C infection. The article can be found at: https://doi.org/10.1016/j.jhep.2013.03.016
+
+Some details about the dataset:
+
+- For **Category**, there are 5 different classifications which includes the stages of Hep C:
 *0=Blood Donor, 0s=suspect Blood Donor, 1=Hepatitis, 2=Fibrosis, 3=Cirrhosis.*
 
-There are 10 different labs taken from each patient. The labs include: albumin (**ALB**), bilirubin (**BIL**), choline esterase (**CHE**), $\gamma$-glutamyl-transferase (**GGT**), aspartate amino-transferase (**AST**), and alanine amino-transferase (**ALT**).
+- There are 10 different labs taken from each patient. The labs include: albumin (**ALB**), bilirubin (**BIL**), choline esterase (**CHE**), $\gamma$-glutamyl-transferase (**GGT**), aspartate amino-transferase (**AST**), and alanine amino-transferase (**ALT**).
 
 
 ```{r dataset, echo=FALSE}
@@ -81,12 +85,44 @@ HCV_data <- kable(old_HCV, align = "c", escape = T) %>%
 
 ## Age Range ##
 
-```{r Demographics-1, echo=FALSE, fig.align='center', fig.cap='The number of patients in each age interval'}
+Figure 1 shows the general age groups of the patient in the study. The youngest patient in this study was 19 and the oldest patient was 77. The age ranges are broken down 10-19, 20-29, 30-39, 40-49, 50-59, 60-69 and 70-79. 
+
+```{r Demographics-1, echo=FALSE, fig.cap='The number of patients in each age interval'}
 plot1
 ```
+\pagebreak
+
+## Age & Sex ##
+
+Figure 2 is a similar graph to Figure 1 from above. However, Figure 2 is showing the number of patient by age group and sex.
+
+```{r Demographics-2, echo=FALSE, fig.cap='The number of patients in each age interval by sex'}
+plot2
+```
+\pagebreak
+
+## Age & Hepatitis C Stage ##
+
+Figure 3 is only showing patients with Hepatitis and the other progressive stages like Fibrosis or Cirrhosis within each age range. 
+
+```{r Demographics-3, echo=FALSE, fig.cap='The number of patients in each age interval by Hepatitis stage'}
+plot3
+```
+\pagebreak
 
 
+# Lab test: Albumin measurement (ALB) # 
 
+Figure 4 shows the Albumin measurements for patients who have Hepatitis, Fibrosis or Cirrhosis. 
 
+According the VA, *"A low albumin level in patients with hepatitis C can be a sign of cirrhosis (advanced liver disease)".*
+https://www.hepatitis.va.gov/hcv/patient/diagnosis/labtests-albumin.asp
+
+In the figure, there are patients with Cirrhosis who do show lower ALB levels than the standard range which is highlighted in green (34 to 54 g/L). Because normal value ranges may vary slightly among different laboratories and tests, the highlighted area is based on the UCSF medical test for ALB (https://www.ucsfhealth.org/medical-tests/003480).
+
+```{r ALB, echo=FALSE, fig.cap='Albumin measurement (ALB) in patients with Hepatitis C, Fibrosis or Cirrhosis'}
+plot4
+```
+\pagebreak
 
 
