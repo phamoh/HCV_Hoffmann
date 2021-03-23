@@ -36,7 +36,7 @@ rownames(old_HCV) <- 1:nrow(old_HCV)
 HCV <- HCV %>%
   mutate(Sex = str_to_upper(Sex))
 
-# Split the diagnosis "Category" column into 2 separate columns 
+# Split the diagnosis "Category" column into 2 separate columns
 HCV <- HCV %>% 
   separate(Category, c("Category", "Category_type"), sep = "([=])") %>%
   mutate(Category_type = str_to_title(Category_type))
@@ -88,8 +88,6 @@ plot3 <- ggplot(data = subset(HCV, Category_type %in% c("Hepatitis", "Fibrosis",
 
 # Jitter plot of Albumin measurement (ALB) in patients with "Hepatitis", "Fibrosis", "Cirrhosis"
 # Plot includes a shaded green area that represents "normal albumin range"
-# Low albumin level in patients with hepatitis C can be a sign of cirrhosis
-
 plot4 <- ggplot(data = subset(HCV, Category_type %in% c("Hepatitis", "Fibrosis", "Cirrhosis")), aes(x = Category_type, y = ALB, colour = Category_type)) +
   geom_jitter(aes(fill = Category_type), width = 0.25, show.legend =FALSE, na.rm = TRUE) + 
   scale_y_continuous(breaks = seq(0, 60, 5)) +
@@ -101,11 +99,11 @@ plot4 <- ggplot(data = subset(HCV, Category_type %in% c("Hepatitis", "Fibrosis",
   theme_bw()
 
 
-
+# Output
 rmarkdown::render(
   input = paste("Lichtinghagen_graphs.Rmd", sep=''), 
   output_format = "pdf_document",
-  output_file = paste("Hoffmann_graphs.pdf", sep='')
+  output_file = paste("Lichtinghagen_graphs.pdf", sep='')
 )
 
 
